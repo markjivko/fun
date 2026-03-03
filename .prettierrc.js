@@ -1,0 +1,35 @@
+module.exports = {
+    arrowParens: "avoid",
+    bracketSpacing: true,
+    htmlWhitespaceSensitivity: "css",
+    insertPragma: false,
+    bracketSameLine: true,
+    jsxSingleQuote: false,
+    printWidth: 120,
+    proseWrap: "preserve",
+    quoteProps: "consistent",
+    requirePragma: false,
+    semi: true,
+    singleQuote: false,
+    tabWidth: 4,
+    trailingComma: "none",
+    braceStyle: "1tbs",
+    useTabs: false,
+    overrides: [
+        {
+            files: "*.php",
+            options: {
+                phpVersion: "8.2",
+                printWidth: 120,
+                braceStyle: "1tbs",
+                trailingCommaPHP: false
+            }
+        },
+        {
+            files: "*.yml",
+            options: {
+                tabWidth: 2
+            }
+        }
+    ]
+};
