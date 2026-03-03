@@ -1,27 +1,28 @@
 <?php
+class Solution {
+    /**
+     * @param int[] $nums
+     * @param int $target
+     * @return int[]
+     */
+    static function twoSum($nums, $target) {
+        $numsLength = count($nums);
+        $pairs = [];
 
-/**
- * @param int[] $nums
- * @param int $target
- * @return int[]
- */
-function twoSum($nums, $target) {
-    $numsLength = count($nums);
-    $pairs = [];
+        for ($index = 0; $index < $numsLength; $index++) {
+            $diff = $target - $nums[$index];
 
-    for ($index = 0; $index < $numsLength; $index++) {
-        $diff = $target - $nums[$index];
+            // Store pair number -> current index
+            if (!isset($pairs[$diff])) {
+                $pairs[$diff] = $index;
+            }
 
-        // Store pair number -> current index
-        if (!isset($pairs[$diff])) {
-            $pairs[$diff] = $index;
+            // Pair found (not self)
+            if (isset($pairs[$nums[$index]]) && $pairs[$nums[$index]] !== $index) {
+                return [$pairs[$nums[$index]], $index];
+            }
         }
 
-        // Pair found (not self)
-        if (isset($pairs[$nums[$index]]) && $pairs[$nums[$index]] !== $index) {
-            return [$pairs[$nums[$index]], $index];
-        }
+        return [-1, -1];
     }
-
-    return [-1, -1];
 }
