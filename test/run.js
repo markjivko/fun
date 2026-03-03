@@ -3,14 +3,14 @@
     const path = require("path");
 
     // Grab the first CLI argument after "npm run test"
-    const testArg = process.argv[2];
+    const testArg = `${process.argv[2] ?? ""}`.replace(/[^\w\-]+/g, "");
 
     // Path to local Jest binary
     const jestArgs = ["--verbose", "--runInBand", "--passWithNoTests"];
 
     // If a test name prefix is provided, add -t
     if (testArg) {
-        jestArgs.push("-t", `^${testArg}-`);
+        jestArgs.push("--testPathPattern", `^.*${testArg}.*\\.test\\.js$`);
     }
 
     // Forward any additional args (optional)
