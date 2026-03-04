@@ -1,7 +1,5 @@
 const { findMedianSortedArrays } = require("../src/4-median-of-arrays.js");
 
-findMedianSortedArrays;
-
 describe("Median of Two Sorted Arrays", () => {
     const tests = [
         { args: [[1, 3], [2]], res: 2 },
