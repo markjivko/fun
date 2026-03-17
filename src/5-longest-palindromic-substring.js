@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function (s) {
+const longestPalindrome = function (s) {
     let windowSize = s.length;
 
     if (windowSize <= 1) {

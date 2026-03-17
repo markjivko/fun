@@ -1,6 +1,8 @@
 module.exports = {
     verbose: false,
+    cache: true,
+    rootDir: "./test/",
     collectCoverage: false,
-    rootDir: "./test",
+    testEnvironment: "node",
     setupFilesAfterEnv: ["<rootDir>/.jest/jest.init.js"]
 };

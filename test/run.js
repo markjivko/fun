@@ -1,7 +1,7 @@
-(async () => {
-    const spawn = require("cross-spawn");
-    const path = require("path");
+const path = require("path");
+const spawn = require("cross-spawn");
 
+(async () => {
     // Grab the first CLI argument after "npm run test"
     const testArg = `${process.argv[2] ?? ""}`.replace(/[^\w\-]+/g, "");
 
@@ -10,7 +10,7 @@
 
     // If a test name prefix is provided, add -t
     if (testArg) {
-        jestArgs.push("--testPathPattern", `^.*${testArg}.*\\.test\\.js$`);
+        jestArgs.push("--testPathPattern", `^.*${testArg}-.*\\.test\\.js$`);
     }
 
     // Forward any additional args (optional)
@@ -19,7 +19,7 @@
     }
 
     // Run Jest
-    const result = await spawn.sync("npx", ["jest", ...jestArgs], {
+    const result = await spawn.sync("node", ["./node_modules/jest/bin/jest.js", ...jestArgs], {
         stdio: "inherit",
         cwd: path.dirname(__dirname)
     });
