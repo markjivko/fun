@@ -137,14 +137,14 @@ const findMedianSortedArrays = function (nums1, nums2) {
         nums2 = aux;
     }
 
-    const middle = Math.floor((nums1.length + nums2.length + 1) / 2);
+    const half = Math.floor((nums1.length + nums2.length + 1) / 2);
 
     let left = 0;
     let right = nums1.length;
 
     while (left <= right) {
         const p1 = Math.floor((left + right) / 2);
-        const p2 = middle - p1;
+        const p2 = half - p1;
 
         const l1 = nums1[p1 - 1] ?? -Infinity;
         const r1 = nums1[p1] ?? Infinity;
@@ -168,6 +168,4 @@ const findMedianSortedArrays = function (nums1, nums2) {
     }
 };
 
-module.exports = { findMedianSortedArrays, findMedianSortedArraysMN };
-
-console.log(findMedianSortedArrays([1, 6], [2, 3, 7, 9, 10]));
+module.exports = { findMedianSortedArrays, findMedianSortedArraysMN, findMedianSortedArraysVerbose };
