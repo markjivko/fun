@@ -33,7 +33,7 @@ const intToRoman = num => {
                 break;
         }
 
-        num = parseInt(num / 10, 10);
+        num = Math.floor(num / 10);
         pow++;
     }
 
