@@ -4,38 +4,48 @@
  * @return {boolean}
  */
 const isMatch = (string, pattern) => {
+    const checkCache = {};
     const checkMatch = (si, pi) => {
-        const lazy = "*" === pattern[pi + 1];
+        const key = `${si}-${pi}`;
 
-        // End of the line (nothing to match)
-        if (si >= string.length && pi >= pattern.length) {
-            return true;
-        }
+        if ("undefined" === typeof checkCache[key]) {
+            checkCache[key] = false;
 
-        if (!lazy) {
-            if (si < string.length && ("." === pattern[pi] || pattern[pi] === string[si])) {
-                return checkMatch(si + 1, pi + 1);
-            }
-        } else {
-            // Greedy match
-            if ("." === pattern[pi] || pattern[pi] === string[si]) {
-                if (si < string.length && checkMatch(si + 1, pi)) {
-                    return true;
+            const lazy = "*" === pattern[pi + 1];
+            do {
+                // End of the line (nothing to match)
+                if (si >= string.length && pi >= pattern.length) {
+                    checkCache[key] = true;
+                    break;
                 }
-            }
 
-            // Skip this character
-            if (checkMatch(si, pi + 2)) {
-                return true;
-            }
+                if (!lazy) {
+                    if (si < string.length && ("." === pattern[pi] || pattern[pi] === string[si])) {
+                        checkCache[key] = checkMatch(si + 1, pi + 1);
+                        break;
+                    }
+                } else {
+                    // Greedy match
+                    if ("." === pattern[pi] || pattern[pi] === string[si]) {
+                        if (si < string.length && checkMatch(si + 1, pi)) {
+                            checkCache[key] = true;
+                            break;
+                        }
+                    }
+
+                    // Skip this character
+                    if (checkMatch(si, pi + 2)) {
+                        checkCache[key] = true;
+                        break;
+                    }
+                }
+            } while (false);
         }
 
-        return false;
+        return checkCache[key];
     };
 
     return checkMatch(0, 0);
 };
 
 module.exports = { isMatch };
-
-console.log(isMatch("mississippi", "mis*is*p*."));
