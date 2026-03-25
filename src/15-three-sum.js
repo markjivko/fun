@@ -8,18 +8,18 @@ const threeSum = nums => {
     nums.sort((a, b) => a - b);
     if (nums[0] <= 0) {
         // Last value occurence
-        const last = new Map();
+        const firsts = [];
+        const mapLast = new Map();
         for (let i = 0; i < nums.length; i++) {
-            last.set(nums[i], i);
-        }
-
-        // Traverse the numbers
-        for (let i = 0; i < nums.length - 2; i++) {
-            // Skip duplicates for i
-            if (0 !== i && nums[i] === nums[i - 1]) {
-                continue;
+            if (!mapLast.has(nums[i])) {
+                firsts.push(i);
             }
 
+            mapLast.set(nums[i], i);
+        }
+
+        // Traverse the first occurences
+        for (let i of firsts) {
             // No solution possible from this point
             if (nums[i] > 0) {
                 break;
@@ -35,7 +35,7 @@ const threeSum = nums => {
                 const key = -(nums[i] + nums[j]);
 
                 // Append the result
-                if (last.has(key) && last.get(key) > j) {
+                if (mapLast.has(key) && mapLast.get(key) > j) {
                     result.push([nums[i], nums[j], key]);
                 }
             }
